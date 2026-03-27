@@ -8,12 +8,11 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const s3 = new S3Client({
   endpoint: process.env.BLOB_ENDPOINT,
-  region: process.env.BLOB_REGION ?? "us-east-1",
+  region: process.env.BLOB_REGION ?? "auto",
   credentials: {
     accessKeyId: process.env.BLOB_ACCESS_KEY!,
     secretAccessKey: process.env.BLOB_SECRET_KEY!,
   },
-  forcePathStyle: true, // required for MinIO
 });
 
 const BUCKET = process.env.BLOB_BUCKET ?? "openintel";
