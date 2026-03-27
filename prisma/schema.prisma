@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model OsintEntry {
+  id          String   @id @default(cuid())
+  title       String
+  source      String
+  url         String?
+  description String
+  tags        String[]
+  attachments String[]
+  status      Status   @default(PENDING)
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("osint_entries")
+}
+
+model AsnEntry {
+  id           String   @id @default(cuid())
+  asn          String
+  organization String
+  country      String?
+  ipRanges     String[]
+  description  String?
+  tags         String[]
+  attachments  String[]
+  status       Status   @default(PENDING)
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("asn_entries")
+}
+
+model OpenSourceEntry {
+  id          String   @id @default(cuid())
+  title       String
+  dataType    String
+  sourceUrl   String?
+  description String
+  tags        String[]
+  attachments String[]
+  status      Status   @default(PENDING)
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("open_source_entries")
+}
